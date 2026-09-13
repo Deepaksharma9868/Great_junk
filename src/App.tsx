@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CallModal } from './components/CallModal';
@@ -8,6 +8,25 @@ import { Home } from './pages/Home';
 import { WhyGjr } from './pages/WhyGjr';
 import { Faq } from './pages/Faq';
 import { GetQuote } from './pages/GetQuote';
+import { Blog } from './pages/Blog';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
 
 export default function App() {
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
@@ -15,6 +34,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-white text-slate-800 selection:bg-[#84d800] selection:text-[#091b2f]">
         {/* Top Navigation */}
         <Navbar onOpenCall={() => setIsCallModalOpen(true)} />
@@ -47,6 +67,14 @@ export default function App() {
                   setSelectedService={setSelectedService}
                 />
               } 
+            />
+            <Route 
+              path="/blog" 
+              element={<Blog onOpenCall={() => setIsCallModalOpen(true)} />} 
+            />
+            <Route 
+              path="/privacy-policy" 
+              element={<PrivacyPolicy onOpenCall={() => setIsCallModalOpen(true)} />} 
             />
           </Routes>
         </div>
