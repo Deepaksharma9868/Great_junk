@@ -1,0 +1,6 @@
+{
+  "name": "Great Junk Removalist Melbourne",
+  "description": "Fast, reliable junk and rubbish removal for homes, businesses, gardens and construction sites in Melbourne. Same day service, all-inclusive pricing from $99.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
