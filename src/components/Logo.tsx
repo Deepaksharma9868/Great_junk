@@ -25,8 +25,7 @@ export const Logo: React.FC<LogoProps> = ({
     size === 'sm' ? 'text-[7px]' : size === 'lg' ? 'text-[9px]' : 'text-[8px] sm:text-[8.5px]';
 
   return (
-    <a
-      href="#"
+    <div
       className={`inline-flex items-center gap-2.5 sm:gap-3 group select-none ${className}`}
       id="brand-logo"
       aria-label="Great Junk Removalist Melbourne"
@@ -72,6 +71,6 @@ export const Logo: React.FC<LogoProps> = ({
           </span>
         </div>
       )}
-    </a>
+    </div>
   );
 };

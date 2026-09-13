@@ -237,7 +237,7 @@ export const WorkShowcase: React.FC = () => {
         ) : (
           /* INTERACTIVE SLIDER MODE */
           <div
-            className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[500px] rounded-2xl overflow-hidden shadow-xl border border-slate-200 select-none bg-slate-900 group"
+            className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[500px] rounded-2xl overflow-hidden shadow-xl border border-slate-200 select-none touch-none bg-slate-900 group"
             id="before-after-slider-container"
             onMouseMove={(e) => {
               if (isDragging) {
@@ -246,11 +246,15 @@ export const WorkShowcase: React.FC = () => {
             }}
             onMouseDown={() => setIsDragging(true)}
             onMouseUp={() => setIsDragging(false)}
+            onMouseLeave={() => setIsDragging(false)}
             onTouchMove={(e) => {
               if (e.touches[0]) {
                 handleSliderMove(e.touches[0].clientX, e.currentTarget.getBoundingClientRect());
               }
             }}
+            onTouchStart={() => setIsDragging(true)}
+            onTouchEnd={() => setIsDragging(false)}
+            onTouchCancel={() => setIsDragging(false)}
           >
             {/* AFTER IMAGE (Underneath / Background) */}
             <div className="absolute inset-0 w-full h-full">
@@ -276,23 +280,20 @@ export const WorkShowcase: React.FC = () => {
 
             {/* BEFORE IMAGE (Clipped on Left) */}
             <div
-              className="absolute inset-0 h-full overflow-hidden"
-              style={{ width: `${sliderPos}%` }}
+              className="absolute inset-0 w-full h-full"
+              style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
             >
-              <div className="relative w-full h-full" style={{ width: '100%', minWidth: '100%' }}>
-                <img
-                  src={currentJob.beforeImage}
-                  alt={`${currentJob.title} before cleanup`}
-                  className="absolute inset-0 w-full h-full object-cover max-w-none"
-                  style={{ width: '100%' }}
-                  referrerPolicy="no-referrer"
-                />
-                {/* "Before" Badge (Lime green) */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="inline-block px-3 py-1 bg-[#84d800] text-[#091b2f] font-extrabold text-xs rounded-md shadow">
-                    Before
-                  </span>
-                </div>
+              <img
+                src={currentJob.beforeImage}
+                alt={`${currentJob.title} before cleanup`}
+                className="absolute inset-0 w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+              {/* "Before" Badge (Lime green) */}
+              <div className="absolute top-4 left-4 z-10">
+                <span className="inline-block px-3 py-1 bg-[#84d800] text-[#091b2f] font-extrabold text-xs rounded-md shadow">
+                  Before
+                </span>
               </div>
             </div>
 

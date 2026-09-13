@@ -23,7 +23,7 @@ export const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           <button
             onClick={onQuoteClick}
             className="absolute left-[4%] top-[77%] w-[28%] h-[15%] cursor-pointer opacity-0 rounded-xl focus:outline-hidden"
-            aria-label="Get a Free Quote"
+            aria-label="Get a Quote"
             id="hero-banner-hotspot-btn"
           />
         </div>
