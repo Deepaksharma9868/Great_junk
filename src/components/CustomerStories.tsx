@@ -46,6 +46,7 @@ export const CustomerStories: React.FC = () => {
     'story-7': 8,
     'story-8': 16,
   });
+  const [expandedStories, setExpandedStories] = useState<{ [id: string]: boolean }>({});
 
   // Modal form state
   const [formData, setFormData] = useState({
@@ -140,187 +141,201 @@ export const CustomerStories: React.FC = () => {
 
   return (
     <section
-      className="w-full bg-[#f8fafc] py-10 sm:py-12 border-t border-b border-slate-200/90 relative"
+      className="w-full bg-[#091b2f] py-14 sm:py-20 border-t border-b border-slate-800 text-white relative overflow-hidden"
       id="reviews"
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Subtle top ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-blue-600/10 blur-3xl pointer-events-none rounded-full" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Compact Header Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-          <div className="flex items-center gap-3 text-center sm:text-left">
-            <div>
-              <div className="flex items-center gap-2 justify-center sm:justify-start">
-                <span className="text-xl sm:text-2xl font-black text-[#091b2f] tracking-tight">
-                  Real Stories from{' '}
-                  <span className="text-[#559400]">Satisfied Customers</span>
-                </span>
-                
-                {/* Google 5.0 Badge */}
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 shadow-2xs shrink-0">
-                  <span className="text-blue-600 font-extrabold">G</span>
-                  <span className="text-amber-400">★★★★★</span>
-                  <span className="text-slate-500 font-semibold text-[11px]">(934+)</span>
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Authentic reviews from Melbourne locals. Stories advance automatically.
-              </p>
-            </div>
-          </div>
-
-          {/* Controls: Prev / Next / Add Story */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handlePrev}
-              className="p-2 bg-white hover:bg-slate-100 text-[#091b2f] border border-slate-200 rounded-lg transition-colors cursor-pointer"
-              aria-label="Previous story"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-
-            <span className="text-xs font-bold text-slate-500 px-1 min-w-[42px] text-center">
-              {currentIndex + 1} / {stories.length}
-            </span>
-
-            <button
-              onClick={handleNext}
-              className="p-2 bg-white hover:bg-slate-100 text-[#091b2f] border border-slate-200 rounded-lg transition-colors cursor-pointer"
-              aria-label="Next story"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="ml-1 inline-flex items-center gap-1.5 px-3 py-2 bg-[#84d800] hover:bg-[#77c900] text-[#091b2f] text-xs font-extrabold rounded-lg shadow-2xs transition-all cursor-pointer shrink-0"
-              id="write-customer-story-btn"
-            >
-              <PlusCircle className="w-3.5 h-3.5" />
-              <span>Share Story</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Compact Auto-Sliding Card Window */}
+        {/* Main Dark Blue Container (like Image 2) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="relative bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all p-6 sm:p-7 overflow-hidden"
+          className="bg-[#0b1626] border border-[#1d2f47] rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl relative"
         >
-          {/* Subtle Auto-Slide Progress Bar at top of card */}
-          {!isHovered && (
-            <div className="absolute top-0 left-0 right-0 h-1 bg-slate-100 overflow-hidden">
-              <div
-                key={currentIndex}
-                className="h-full bg-[#84d800]"
-                style={{
-                  animation: 'progressBar 2.5s linear infinite',
-                }}
-              />
-            </div>
-          )}
+          {/* Top Header Bar */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+            <div>
+              {/* Google Reviews Header */}
+              <div className="flex items-center gap-2.5 mb-1.5">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 shrink-0" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17Z" />
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.27v3.15C3.25 21.36 7.31 24 12 24Z" />
+                  <path fill="#FBBC05" d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.14-1.54.38-2.26V6.59H1.27C.46 8.21 0 10.05 0 12s.46 3.79 1.27 5.41l4.01-3.15Z" />
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.64 1.27 6.59l4.01 3.15c.95-2.84 3.6-4.99 6.72-4.99Z" />
+                </svg>
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">Google</span>
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">Reviews</span>
+              </div>
 
-          {/* Quote Icon Backdrop */}
-          <MessageSquareQuote className="absolute top-5 right-6 w-16 h-16 text-slate-100/90 pointer-events-none stroke-1" />
-
-          {/* Card Content with Smooth Transition */}
-          <div key={currentStory.id} className="relative z-10 transition-opacity duration-300">
-            
-            {/* Top Row: Stars, Category & Time */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+              {/* Rating & Stars */}
               <div className="flex items-center gap-2">
-                <div className="flex text-amber-400">
-                  {[...Array(currentStory.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
+                <span className="font-extrabold text-white text-lg sm:text-xl">0.0</span>
+                <div className="flex text-[#f59e0b] text-base sm:text-lg tracking-wider">
+                  ★★★★★
                 </div>
-                <span className="text-xs font-bold text-slate-700">5.0 Star Experience</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/60">
-                  {currentStory.serviceCategory}
-                </span>
-                <span className="text-xs text-slate-400">• {currentStory.timeAgo}</span>
+                <span className="text-slate-400 text-sm font-medium">(0)</span>
               </div>
             </div>
 
-            {/* Story Headline */}
-            <h3 className="text-base sm:text-lg font-bold text-[#091b2f] mb-2 leading-snug">
-              "{currentStory.storyTitle}"
-            </h3>
+            {/* Action Buttons */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-5 py-2.5 bg-[#1a73e8] hover:bg-[#1557b0] text-white text-xs sm:text-sm font-bold rounded-full shadow-md transition-all cursor-pointer flex items-center gap-2 hover:shadow-blue-500/20"
+                id="review-google-btn"
+              >
+                <span>Review us on Google</span>
+              </button>
 
-            {/* Story Review Text */}
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-4xl">
-              {currentStory.reviewText}
-            </p>
-
-            {/* Highlight Pill (if present) */}
-            {currentStory.highlight && (
-              <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-[#84d800]/10 border border-[#84d800]/30 rounded-lg text-xs font-semibold text-[#2d5200]">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#559400] shrink-0" />
-                <span>{currentStory.highlight}</span>
-              </div>
-            )}
-
-            {/* Bottom Row: Author details & Helpful counter */}
-            <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-xs ${
-                    currentStory.avatarBg || 'bg-slate-700'
-                  }`}
-                >
-                  {currentStory.initials}
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-bold text-xs sm:text-sm text-[#091b2f]">
-                      {currentStory.authorName}
-                    </span>
-                    {currentStory.verified && (
-                      <span title="Verified Customer" className="text-blue-500">
-                        <CheckCircle2 className="w-3.5 h-3.5 fill-blue-500 text-white" />
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-1 text-[11px] text-slate-500">
-                    <MapPin className="w-3 h-3 text-slate-400" />
-                    <span>{currentStory.suburb}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Helpful Vote Button */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => handleHelpful(currentStory.id)}
-                  className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#559400] transition cursor-pointer px-2.5 py-1 rounded bg-slate-50 hover:bg-slate-100 border border-slate-200/80"
-                  title="Mark review as helpful"
-                >
-                  <ThumbsUp className="w-3.5 h-3.5" />
-                  <span>Helpful ({helpfulCounts[currentStory.id] || 0})</span>
-                </button>
-              </div>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-4 py-2.5 bg-[#84d800] hover:bg-[#77c900] text-[#091b2f] text-xs sm:text-sm font-extrabold rounded-full shadow-md transition-all cursor-pointer flex items-center gap-1.5"
+                id="write-customer-story-btn"
+              >
+                <PlusCircle className="w-4 h-4" />
+                <span>Share Story</span>
+              </button>
             </div>
-
           </div>
-        </div>
 
-        {/* Small Dot Indicators */}
-        <div className="flex items-center justify-center gap-1.5 mt-4">
-          {stories.map((s, idx) => (
+          {/* Cards Carousel Area with Side Navigation Buttons */}
+          <div className="relative">
+            {/* Left Nav Button */}
             <button
-              key={s.id}
-              onClick={() => setCurrentIndex(idx)}
-              className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                currentIndex === idx
-                  ? 'w-6 bg-[#84d800]'
-                  : 'w-2 bg-slate-300 hover:bg-slate-400'
-              }`}
-              aria-label={`Jump to story ${idx + 1}`}
-            />
-          ))}
+              onClick={handlePrev}
+              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-slate-700/90 hover:bg-slate-600 text-white backdrop-blur-xs flex items-center justify-center shadow-lg transition cursor-pointer border border-slate-600"
+              aria-label="Previous review"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Right Nav Button */}
+            <button
+              onClick={handleNext}
+              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-slate-700/90 hover:bg-slate-600 text-white backdrop-blur-xs flex items-center justify-center shadow-lg transition cursor-pointer border border-slate-600"
+              aria-label="Next review"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* 3 Review Cards Grid (responsive: 1 on mobile, 2 on tablet, 3 on desktop) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {[0, 1, 2].map((offset, colIdx) => {
+                const story = stories[(currentIndex + offset) % stories.length];
+                const isExpanded = expandedStories[story.id];
+                const hiddenClass = colIdx === 1 ? 'hidden md:flex' : colIdx === 2 ? 'hidden lg:flex' : 'flex';
+
+                return (
+                  <div
+                    key={story.id}
+                    className={`${hiddenClass} flex-col justify-between h-full bg-[#131f31] hover:bg-[#16253b] border border-[#213550] rounded-2xl p-5 sm:p-6 transition-all duration-200 shadow-md min-h-[260px]`}
+                  >
+                    <div>
+                      {/* Top Row: User Avatar with Google Icon + Name + Verified Badge */}
+                      <div className="flex items-start justify-between gap-3 mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="relative shrink-0">
+                            <div
+                              className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xs ${
+                                story.avatarBg || 'bg-blue-600'
+                              }`}
+                            >
+                              {story.initials}
+                            </div>
+                            {/* Mini Google G Badge on Avatar */}
+                            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-xs border border-white">
+                              <svg className="w-2.5 h-2.5" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17Z" />
+                                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.27v3.15C3.25 21.36 7.31 24 12 24Z" />
+                                <path fill="#FBBC05" d="M5.28 14.26c-.25-.72-.38-1.49-.38-2.26s.14-1.54.38-2.26V6.59H1.27C.46 8.21 0 10.05 0 12s.46 3.79 1.27 5.41l4.01-3.15Z" />
+                                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.64 1.27 6.59l4.01 3.15c.95-2.84 3.6-4.99 6.72-4.99Z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-bold text-sm text-white">{story.authorName}</span>
+                              {story.verified && (
+                                <svg className="w-4 h-4 fill-[#1a73e8] text-white shrink-0" viewBox="0 0 24 24">
+                                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                              )}
+                            </div>
+                            <span className="text-slate-400 text-xs block">{story.timeAgo}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* 5 Gold Stars */}
+                      <div className="flex items-center gap-1 mb-2 text-[#f59e0b] text-base tracking-wider">
+                        ★★★★★
+                      </div>
+
+                      {/* Review Headline & Body */}
+                      <h4 className="text-sm font-bold text-white mb-1.5 leading-snug">
+                        "{story.storyTitle}"
+                      </h4>
+
+                      <p className={`text-xs sm:text-sm text-slate-300 leading-relaxed ${isExpanded ? '' : 'line-clamp-3'}`}>
+                        {story.reviewText}
+                      </p>
+
+                      {story.reviewText.length > 130 && (
+                        <button
+                          onClick={() => setExpandedStories((prev) => ({ ...prev, [story.id]: !prev[story.id] }))}
+                          className="text-[#1a73e8] hover:text-blue-400 text-xs font-semibold mt-1 transition-colors cursor-pointer"
+                        >
+                          {isExpanded ? 'Show less' : 'Read more'}
+                        </button>
+                      )}
+
+                      {/* Highlight Tag */}
+                      {story.highlight && (
+                        <div className="mt-3 flex items-start gap-2 px-3 py-2 bg-[#84d800]/10 border border-[#84d800]/25 rounded-xl text-xs font-medium text-[#a3f71b] leading-snug">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#84d800] shrink-0 mt-0.5" />
+                          <span className="break-words">{story.highlight}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Bottom Meta & Helpful Button */}
+                    <div className="mt-4 pt-3 border-t border-[#1d2f47] flex items-center justify-between gap-2 text-xs">
+                      <span className="text-slate-400 text-[11px] truncate">{story.suburb}</span>
+                      <button
+                        onClick={() => handleHelpful(story.id)}
+                        className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-white transition px-2 py-0.5 rounded bg-[#1c2e47] hover:bg-[#253e61] border border-[#263e5e] cursor-pointer shrink-0"
+                        title="Mark review as helpful"
+                      >
+                        <ThumbsUp className="w-3 h-3" />
+                        <span>Helpful ({helpfulCounts[story.id] || 0})</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Bottom Pagination Dots */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {stories.map((s, idx) => (
+              <button
+                key={s.id}
+                onClick={() => setCurrentIndex(idx)}
+                className={`rounded-full transition-all cursor-pointer ${
+                  currentIndex === idx
+                    ? 'w-6 h-2 bg-white'
+                    : 'w-2 h-2 bg-slate-600 hover:bg-slate-500'
+                }`}
+                aria-label={`Jump to review ${idx + 1}`}
+              />
+            ))}
+          </div>
+
         </div>
 
       </div>

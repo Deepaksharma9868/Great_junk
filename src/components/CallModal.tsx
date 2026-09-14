@@ -66,7 +66,7 @@ export const CallModal: React.FC<CallModalProps> = ({ isOpen, onClose }) => {
           <div className="bg-slate-50 rounded-xl p-3.5 space-y-2 text-left text-xs text-slate-600">
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-[#559400] flex-shrink-0" />
-              <span>Open 7 Days · 7:00 AM – 7:00 PM</span>
+              <span>Open 7 Days · 7:30 AM – 7:00 PM</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-[#559400] flex-shrink-0" />

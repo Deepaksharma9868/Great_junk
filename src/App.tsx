@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CallModal } from './components/CallModal';
+import { QuickCallButton } from './components/QuickCallButton';
 
 import { Home } from './pages/Home';
 import { WhyGjr } from './pages/WhyGjr';
@@ -87,6 +88,9 @@ export default function App() {
           isOpen={isCallModalOpen}
           onClose={() => setIsCallModalOpen(false)}
         />
+
+        {/* Floating Quick Call Button with Call Us and WhatsApp */}
+        <QuickCallButton onOpenCallModal={() => setIsCallModalOpen(true)} />
       </div>
     </BrowserRouter>
   );

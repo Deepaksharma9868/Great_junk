@@ -9,8 +9,8 @@ interface GoogleReviewBadgeProps {
 
 export const GoogleReviewBadge: React.FC<GoogleReviewBadgeProps> = ({ 
   placeId, 
-  fallbackRating = 5.0, 
-  fallbackCount = 938 
+  fallbackRating = 0.0, 
+  fallbackCount = 0 
 }) => {
   const placesLib = useMapsLibrary('places');
   const [rating, setRating] = useState<number | null>(null);
@@ -34,7 +34,7 @@ export const GoogleReviewBadge: React.FC<GoogleReviewBadgeProps> = ({
         if (place.rating) setRating(place.rating);
         if (place.userRatingCount) setReviewCount(place.userRatingCount);
       } catch (error) {
-        console.error("Failed to fetch Google Maps Place data", error);
+        console.warn("Could not fetch live Google Maps Place data, using fallback rating:", error);
       }
     };
     

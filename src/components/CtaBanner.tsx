@@ -9,7 +9,7 @@ interface CtaBannerProps {
 export const CtaBanner: React.FC<CtaBannerProps> = ({ onQuoteClick }) => {
   return (
     <section className="relative w-full bg-[#07192d] overflow-hidden border-t border-slate-800" id="bottom-cta-banner">
-      <div className="relative w-full max-w-[1476px] mx-auto">
+      <div className="relative w-full max-w-[2170px] mx-auto">
         <div className="relative w-full">
           <img
             src={banner2Image}

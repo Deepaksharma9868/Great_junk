@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -13,15 +13,17 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-medium mb-6 text-white">GJR's Top Services</h4>
             <ol className="list-decimal pl-4 space-y-3 text-slate-300">
+              <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Commercial Junk Removal</Link></li>
+              <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Residential Junk Removal</Link></li>
               <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Rubbish Removal Melbourne</Link></li>
               <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Junk Removal Melbourne</Link></li>
               <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Old Furniture Removal</Link></li>
               <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Hoarder House Junk Removal</Link></li>
               <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Furniture Disposal Melbourne</Link></li>
-              <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Piano Disposal Melbourne</Link></li>
               <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Garage Clean Out</Link></li>
-              <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Commercial Junk Removal</Link></li>
               <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Deceased Estate Rubbish Removal</Link></li>
+              <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Spa Removal</Link></li>
+              <li><Link to="/quote" className="hover:text-[#74cb00] transition-colors border-b border-slate-300 hover:border-[#74cb00]">Piano Disposal Melbourne</Link></li>
             </ol>
           </div>
 
@@ -44,37 +46,37 @@ export const Footer: React.FC = () => {
               <li className="flex justify-between items-center">
                 <span>Mon</span>
                 <span className="flex-1 border-b border-dotted border-slate-600 mx-2"></span>
-                <span>7:00AM - 7:00PM</span>
+                <span>7:30AM - 7:00PM</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Tue</span>
                 <span className="flex-1 border-b border-dotted border-slate-600 mx-2"></span>
-                <span>7:00AM - 7:00PM</span>
+                <span>7:30AM - 7:00PM</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Wed</span>
                 <span className="flex-1 border-b border-dotted border-slate-600 mx-2"></span>
-                <span>7:00AM - 7:00PM</span>
+                <span>7:30AM - 7:00PM</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Thu</span>
                 <span className="flex-1 border-b border-dotted border-slate-600 mx-2"></span>
-                <span>7:00AM - 7:00PM</span>
+                <span>7:30AM - 7:00PM</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Fri</span>
                 <span className="flex-1 border-b border-dotted border-slate-600 mx-2"></span>
-                <span>7:00AM - 7:00PM</span>
+                <span>7:30AM - 7:00PM</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Sat</span>
                 <span className="flex-1 border-b border-dotted border-slate-600 mx-2"></span>
-                <span>7:00AM - 7:00PM</span>
+                <span>7:30AM - 7:00PM</span>
               </li>
               <li className="flex justify-between items-center">
                 <span>Sun</span>
                 <span className="flex-1 border-b border-dotted border-slate-600 mx-2"></span>
-                <span>7:00AM - 7:00PM</span>
+                <span>7:30AM - 7:00PM</span>
               </li>
             </ul>
           </div>
@@ -100,11 +102,55 @@ export const Footer: React.FC = () => {
             </div>
 
             <div>
-              <h5 className="font-medium text-white mb-2 text-base">Follow us:</h5>
-              <div className="flex gap-3 text-slate-300">
-                <a href="#" className="hover:text-[#1877F2] transition-colors"><Facebook className="w-5 h-5 fill-current" /></a>
-                <a href="#" className="hover:text-[#E4405F] transition-colors"><Instagram className="w-5 h-5" /></a>
-                <a href="#" className="hover:text-[#FF0000] transition-colors"><Youtube className="w-6 h-6 fill-current" /></a>
+              <h5 className="font-medium text-white mb-3 text-base">Follow us:</h5>
+              <div className="flex items-center gap-3" id="social-links">
+                {/* Facebook */}
+                <a 
+                  href="https://www.facebook.com/share/1GPPJ5jNGF/?mibextid=wwXIfr" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Follow us on Facebook"
+                  className="w-9 h-9 rounded-full bg-[#1877F2] flex items-center justify-center text-white shadow hover:scale-110 hover:shadow-lg hover:shadow-[#1877F2]/40 transition-all duration-200"
+                >
+                  <Facebook className="w-5 h-5 fill-white text-white" />
+                </a>
+
+                {/* Instagram */}
+                <a 
+                  href="https://www.instagram.com/greatjunkremovalist?stkn=MTFnNmVieHk4NWJt&utm_source=qr" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Follow us on Instagram"
+                  className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white shadow hover:scale-110 hover:shadow-lg hover:shadow-[#dc2743]/40 transition-all duration-200"
+                >
+                  <Instagram className="w-5 h-5 text-white stroke-[2.2]" />
+                </a>
+
+                {/* TikTok */}
+                <a 
+                  href="https://www.tiktok.com/@great.junk.removalist?_r=1&_t=ZS-99hckTQdHMr" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Follow us on TikTok"
+                  className="w-9 h-9 rounded-full bg-black border border-slate-700 flex items-center justify-center text-white shadow hover:scale-110 hover:shadow-lg hover:border-slate-500 hover:shadow-cyan-500/20 transition-all duration-200 group"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" 
+                      fill="#25F4EE" 
+                      transform="translate(-0.8, -0.8)" 
+                    />
+                    <path 
+                      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" 
+                      fill="#FE2C55" 
+                      transform="translate(0.8, 0.8)" 
+                    />
+                    <path 
+                      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" 
+                      fill="#FFFFFF" 
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
 
