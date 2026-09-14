@@ -8,6 +8,7 @@ export interface JobShowcase {
   afterImage: string;
   description?: string;
   verified?: boolean;
+  illustrative?: boolean;
 }
 
 export interface QuoteFormData {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, PlusCircle, MapPin, Calendar, CheckCircle, SplitSquareVertical, Columns2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, PlusCircle, MapPin, Calendar, SplitSquareVertical, Columns2 } from 'lucide-react';
 import { JobShowcase } from '../types';
 import { INITIAL_JOBS } from '../data/initialJobs';
 import { UploadDailyJobModal } from './UploadDailyJobModal';
@@ -11,28 +11,25 @@ const STORAGE_KEY = 'gjr_daily_jobs_v3';
 
 export const WorkShowcase: React.FC = () => {
   const [jobs, setJobs] = useState<JobShowcase[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      try {
-        const parsed: JobShowcase[] = JSON.parse(saved);
-        // Ensure no stale broken unsplash links remain in cache
-        const hasBrokenLinks = parsed.some(
-          (j) => j.beforeImage?.includes('unsplash') || j.afterImage?.includes('unsplash')
-        );
-        if (!hasBrokenLinks && parsed.length >= INITIAL_JOBS.length) {
-          return parsed;
-        }
-      } catch (e) {
-        console.error('Error loading jobs from localStorage', e);
-      }
-    }
-    // Clean up stale cache from previous builds
     try {
-      localStorage.removeItem('gjr_daily_jobs');
-      localStorage.removeItem('gjr_daily_jobs_v2');
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_JOBS));
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed: unknown = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          // Refresh built-in examples while retaining the user's uploaded jobs.
+          const builtInIds = new Set(INITIAL_JOBS.map((job) => job.id));
+          const uploadedJobs = parsed.filter(
+            (job): job is JobShowcase =>
+              job && typeof job.id === 'string' &&
+              typeof job.beforeImage === 'string' &&
+              typeof job.afterImage === 'string' &&
+              !builtInIds.has(job.id)
+          );
+          return [...uploadedJobs, ...INITIAL_JOBS];
+        }
+      }
     } catch (e) {
-      console.warn('LocalStorage access restricted', e);
+      console.warn('Unable to restore saved showcase jobs', e);
     }
     return INITIAL_JOBS;
   });
@@ -44,7 +41,11 @@ export const WorkShowcase: React.FC = () => {
   const [viewMode, setViewMode] = useState<'side-by-side' | 'slider'>('side-by-side');
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs));
+    } catch (e) {
+      console.warn('Unable to save showcase jobs', e);
+    }
   }, [jobs]);
 
   const currentJob = jobs[currentIndex] || INITIAL_JOBS[0];
@@ -97,7 +98,7 @@ export const WorkShowcase: React.FC = () => {
               <span>{currentJob.title}</span>
               <span>•</span>
               <span className="text-[#559400] font-semibold flex items-center gap-1">
-                <CheckCircle className="w-3 h-3" /> Updated daily across Melbourne
+                {currentJob.illustrative ? 'AI-generated illustrative example' : 'Community job upload'}
               </span>
             </p>
           </div>
@@ -148,7 +149,7 @@ export const WorkShowcase: React.FC = () => {
         {viewMode === 'side-by-side' ? (
           /* SIDE-BY-SIDE MODE (Original Reference Design) */
           <div
-            className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[500px] rounded-2xl overflow-hidden shadow-xl border border-slate-200 select-none bg-slate-900 group"
+            className="relative w-full aspect-[2/1] rounded-2xl overflow-hidden shadow-xl border border-slate-200 select-none bg-slate-900 group"
             id="before-after-side-by-side-container"
           >
             <div className="grid grid-cols-2 w-full h-full">
@@ -217,7 +218,7 @@ export const WorkShowcase: React.FC = () => {
         ) : (
           /* INTERACTIVE SLIDER MODE */
           <div
-            className="relative w-full aspect-[4/3] sm:aspect-[16/9] max-h-[500px] rounded-2xl overflow-hidden shadow-xl border border-slate-200 select-none touch-none bg-slate-900 group"
+            className="relative w-full aspect-square max-w-[720px] mx-auto rounded-2xl overflow-hidden shadow-xl border border-slate-200 select-none touch-none bg-slate-900 group"
             id="before-after-slider-container"
             onMouseMove={(e) => {
               if (isDragging) {
@@ -315,6 +316,12 @@ export const WorkShowcase: React.FC = () => {
           </div>
         )}
 
+        {currentJob.illustrative && (
+          <p className="mt-3 text-center text-xs text-slate-500">
+            AI-generated examples showing the same setting before and after junk removal.
+          </p>
+        )}
+
         {/* Slider Pagination Dots (Matching screenshot with 8 dots) */}
         <div className="flex items-center justify-center gap-2.5 mt-5">
           {jobs.slice(0, 8).map((job, idx) => (
@@ -342,7 +349,7 @@ export const WorkShowcase: React.FC = () => {
               <span className="font-semibold text-slate-800">{currentJob.title}: </span>
               <span>{currentJob.description}</span>
             </div>
-            <div className="flex items-center gap-3 text-slate-500 font-medium flex-shrink-0">
+            {!currentJob.illustrative && <div className="flex items-center gap-3 text-slate-500 font-medium flex-shrink-0">
               <span className="flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5 text-[#559400]" />
                 {currentJob.suburb}
@@ -352,7 +359,7 @@ export const WorkShowcase: React.FC = () => {
                 <Calendar className="w-3.5 h-3.5 text-[#559400]" />
                 {currentJob.date}
               </span>
-            </div>
+            </div>}
           </div>
         )}
 

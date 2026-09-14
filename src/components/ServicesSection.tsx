@@ -19,7 +19,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'residential',
     title: 'Residential Rubbish Removal',
-    image: '/images/service-residential.webp',
+    image: '/images/services-original/residential.webp',
     description:
       'From Houses to Apartments – nothing is too much trouble. We remove your unwanted junk, rubbish, furniture & even fittings and carpet from where you tell us to.',
     buttonLabel: 'RESIDENTIAL',
@@ -29,7 +29,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'deceased-estate',
     title: 'Deceased Estate Clearance',
-    image: '/images/service-cleanups.webp',
+    image: '/images/services-original/estate.webp',
     description:
       'Compassionate, respectful estate clearance near you. We sort belongings for donation or disposal, handle everything with care, and leave the property ready for sale.',
     buttonLabel: 'DECEASED ESTATE',
@@ -39,7 +39,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'commercial',
     title: 'Commercial Rubbish Removal',
-    image: '/images/service-commercial.webp',
+    image: '/images/services-original/commercial.webp',
     description:
       "Be it Offices, Warehouses or Retail – we have you covered. We'll remove anything, from obsolete stock, IT or furniture and cubicles or even whole strip outs.",
     buttonLabel: 'COMMERCIAL',
@@ -49,7 +49,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'construction',
     title: 'Construction Rubbish Removal',
-    image: '/images/service-construction.webp',
+    image: '/images/services-original/construction.webp',
     description:
       'Reliable and Fast, we clean out any building or demolition site of rubbish and waste or even strip out fixtures and carpet – for a safer, more productive work site.',
     buttonLabel: 'CONSTRUCTION',
@@ -59,7 +59,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'piano-removal',
     title: 'Piano Removal',
-    image: '/images/service-piano.webp',
+    image: '/images/services-original/piano.webp',
     description:
       'Bulky upright and grand pianos moved safely. Experienced team equipped with heavy-duty piano dollies, straps, and protective blankets to avoid floor or wall damage.',
     buttonLabel: 'PIANO REMOVAL',
@@ -69,7 +69,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'green-waste',
     title: 'Green Waste Removal',
-    image: '/images/service-greenwaste.webp',
+    image: '/images/services-original/greenwaste.webp',
     description:
       'Branches, fallen storm trees, yard trimmings, soil, and garden cleanups. We do all the raking and loading, and 100% of organic green waste is delivered to mulch recycling.',
     buttonLabel: 'GREEN WASTE',
@@ -79,7 +79,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'metal-removal',
     title: 'Metal & Scrap Removal',
-    image: '/images/metal-scrap-before.jpg',
+    image: '/images/services-original/metal.webp',
     description:
       'Recycle heavy scrap metal, old corrugated roofing, steel posts, car panels, appliances, and plumbing copper. Fast collection from trade sites and homes.',
     buttonLabel: 'METAL REMOVAL',
@@ -89,7 +89,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'spa-removal',
     title: 'Spa & Hot Tub Removal',
-    image: '/images/service-spa.webp',
+    image: '/images/services-original/spa.webp',
     description:
       'Unwanted backyard spas, jacuzzis, and hot tubs dismantled on-site safely with specialized cutting equipment and hauled away with zero damage to your fences.',
     buttonLabel: 'SPA REMOVAL',
@@ -99,7 +99,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'cardboard-removal',
     title: 'Cardboard Removal',
-    image: '/images/service-cardboard.webp',
+    image: '/images/services-original/cardboard.webp',
     description:
       'Piles of delivery boxes, packaging materials, and pallets from warehouse orders or residential moves cleared out in one trip for eco-conscious recycling.',
     buttonLabel: 'CARDBOARD',
@@ -109,7 +109,7 @@ const ALL_SERVICES: ServiceCard[] = [
   {
     id: 'clean-ups',
     title: 'Clean Ups & Hoarder Support',
-    image: '/images/service-cleanups.webp',
+    image: '/images/services-original/cleanups.webp',
     description:
       'Our services include clean ups for the NDIS, deceased estates, hoarders, spring cleans through to tenants dumped rubbish. We are here to get things cleaned up for you.',
     buttonLabel: 'CLEAN UPS',
@@ -260,6 +260,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                     alt={card.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     loading="lazy"
+                    width={960}
+                    height={660}
                   />
                   
                   {/* Subtle Gradient Shadow */}
