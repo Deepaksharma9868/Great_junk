@@ -5,6 +5,7 @@ interface LogoProps {
   variant?: 'light' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   showText?: boolean;
+  showTagline?: boolean;
 }
 
 export const Logo: React.FC<LogoProps> = ({
@@ -12,6 +13,7 @@ export const Logo: React.FC<LogoProps> = ({
   variant = 'light',
   size = 'md',
   showText = true,
+  showTagline = true,
 }) => {
   const isDark = variant === 'dark';
 
@@ -64,11 +66,13 @@ export const Logo: React.FC<LogoProps> = ({
             REMOVALIST
           </span>
 
-          <span
-            className={`font-bold tracking-wider uppercase text-slate-400 ${taglineSize} mt-0.5`}
-          >
-            WE REMOVE. YOU RELAX.
-          </span>
+          {showTagline && (
+            <span
+              className={`font-bold tracking-wider uppercase text-slate-400 ${taglineSize} mt-0.5`}
+            >
+              WE REMOVE. YOU RELAX.
+            </span>
+          )}
         </div>
       )}
     </div>

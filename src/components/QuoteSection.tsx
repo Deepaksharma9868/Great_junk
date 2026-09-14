@@ -97,7 +97,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
               </h2>
             </div>
 
-            <p className="text-slate-600 text-base leading-relaxed">
+            <p className="text-slate-800 font-medium text-base leading-relaxed">
               Tell us what needs to go. Share a few details and request a quote for your junk removal.
             </p>
 
@@ -106,7 +106,7 @@ export const QuoteSection: React.FC<QuoteSectionProps> = ({
               <p className="text-base sm:text-lg font-bold text-[#091b2f]">
                 All-Inclusive Pricing — From $99
               </p>
-              <p className="text-slate-500 text-sm mt-1">
+              <p className="text-slate-800 font-medium text-sm mt-1">
                 No hidden fees. Labour, loading and removal are included.
               </p>
             </div>

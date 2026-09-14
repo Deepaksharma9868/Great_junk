@@ -26,7 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCall }) => {
           {/* Brand Logo */}
           <div className="flex-shrink-0">
             <Link to="/" onClick={() => setMobileMenuOpen(false)}>
-              <Logo size="md" />
+              <Logo size="md" showTagline={false} />
             </Link>
           </div>
 
